@@ -4,8 +4,7 @@
   "type": "symfony-bundle",
   "license": "MIT",
   "require": {
-    "php": "^7.2.5",
-    "studentbundle/student-bundle": "^1.0"
+    "php": "^7.4"
   },
   "autoload": {
     "psr-4": {
