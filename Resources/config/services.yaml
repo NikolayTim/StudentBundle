@@ -25,7 +25,3 @@ services:
             - ['registerProducer', [!php/const StudentBundle\Service\AsyncService::RATING, '@old_sound_rabbit_mq.rating_producer']]
 
     StudentBundle\Persister\RatingPersister: ~
-
-    StudentBundle\Symfony\MigrationEventSubscriber:
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
