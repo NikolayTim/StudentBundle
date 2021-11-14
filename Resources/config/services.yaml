@@ -11,3 +11,21 @@ services:
     StudentBundle\Service\ClearCacheService:
         arguments:
             $cache: '@redis_adapter'
+
+    StudentBundle\EventListener\ClearCacheSubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+
+    StudentBundle\Service\AggregationService:
+        arguments:
+            $cache: '@redis_adapter'
+
+    StudentBundle\Service\AsyncService:
+        calls:
+            - ['registerProducer', [!php/const StudentBundle\Service\AsyncService::RATING, '@old_sound_rabbit_mq.rating_producer']]
+
+    StudentBundle\Persister\RatingPersister: ~
+
+    StudentBundle\Symfony\MigrationEventSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

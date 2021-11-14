@@ -2,8 +2,7 @@
 
 namespace StudentBundle\Service;
 
-use App\Entity;
-use Symfony\Contracts\Cache\ItemInterface;
+use StudentBundle\Entity;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ClearCacheService
@@ -22,19 +21,20 @@ class ClearCacheService
 
     public function clearCache(object $entity): void
     {
+//        dump($entity);
         if ($entity instanceof Entity\Skill || $entity instanceof Entity\Spectrum)
-            $this->clearCacheByTag([self::CACHE_TAG_BY_SKILLS]);
+            $this->clearCacheByTags([self::CACHE_TAG_BY_SKILLS]);
         elseif ($entity instanceof Entity\Course || $entity instanceof Entity\Lesson)
-            $this->clearCacheByTag([self::CACHE_TAG_BY_COURSES, self::CACHE_TAG_BY_LESSONS]);
+            $this->clearCacheByTags([self::CACHE_TAG_BY_COURSES, self::CACHE_TAG_BY_LESSONS]);
         elseif ($entity instanceof Entity\Task)
-            $this->clearCacheByTag([
+            $this->clearCacheByTags([
                 self::CACHE_TAG_BY_COURSES,
                 self::CACHE_TAG_BY_LESSONS,
                 self::CACHE_TAG_BY_SKILLS
             ]);
         elseif ($entity instanceof Entity\Rating)
         {
-            $this->clearCacheByTag([
+            $this->clearCacheByTags([
                 self::CACHE_TAG_BY_COURSES,
                 self::CACHE_TAG_BY_LESSONS,
                 self::CACHE_TAG_BY_SKILLS,
@@ -43,7 +43,7 @@ class ClearCacheService
         }
     }
 
-    public function clearCacheByTag(array $tags): void
+    public function clearCacheByTags(array $tags): void
     {
         $this->cache->invalidateTags($tags);
     }

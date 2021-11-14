@@ -2,7 +2,7 @@
 
 namespace StudentBundle\Service;
 
-use App\Entity;
+use StudentBundle\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 
 class TestDataService
@@ -21,7 +21,7 @@ class TestDataService
 
     public function generateSkills(): bool
     {
-        for ($i = 1; $i <= 100; $i++)
+        for ($i = 1; $i <= 50; $i++)
         {
             $skills[$i] = new Entity\Skill();
             $skills[$i]->setName(self::SKILL_NAME . $i);
@@ -40,11 +40,13 @@ class TestDataService
             'Сидр Сидоров',
             'Маша Машина',
             'Катя Катина',
+/*
             'Клава Клавина',
             'Вася Васечкин',
             'Оля Олина',
             'Женя Женин',
             'Алексей Алексеев'
+*/
         ];
 
         foreach ($nameStudents as $keyStudent => $nameStudent)
@@ -75,7 +77,7 @@ class TestDataService
             $this->entityManager->persist($courses[$keyCourse]);
             $this->entityManager->flush();
 
-            $cntModules = rand(3, 7);
+            $cntModules = rand(3, 5);
             for ($i = 1; $i <= $cntModules; $i++)
             {
                 $module = new Entity\Course();
@@ -102,7 +104,7 @@ class TestDataService
             if (($module->getParent() ?? null) === null)
                 continue;
 
-            $cntLesson = rand(5, 10);
+            $cntLesson = rand(3, 6);
             for ($i = 1; $i <= $cntLesson; $i++)
             {
                 $lesson = new Entity\Lesson();
@@ -125,7 +127,7 @@ class TestDataService
 
         foreach ($lessons as $lesson)
         {
-            $cntTask = rand(5, 10);
+            $cntTask = rand(4, 6);
             for ($i = 1; $i <= $cntTask; $i++)
             {
                 $task = new Entity\Task();
@@ -149,7 +151,7 @@ class TestDataService
 
         foreach ($tasks as $task)
         {
-            $countSkillsInTask = rand(3, 6);
+            $countSkillsInTask = rand(2, 4);
             $maxPercent = round(100/$countSkillsInTask, 0);
             $percents = 0;
             for ($i = 1; $i <= $countSkillsInTask; $i++)
@@ -186,7 +188,7 @@ class TestDataService
         foreach ($tasks as $task)
         {
             $studentsInTask = [];
-            $countStudentsInTask = rand(4, 8);
+            $countStudentsInTask = rand(3, 5);
             for ($i = 1; $i <= $countStudentsInTask; $i++)
             {
                 $rate = rand(1, 10);
