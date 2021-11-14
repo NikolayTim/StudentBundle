@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2.5",
-    "studentbundle/student-bundle": "^3.0"
+    "studentbundle/student-bundle": "^1.0"
   },
   "autoload": {
     "psr-4": {
