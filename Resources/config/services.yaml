@@ -20,6 +20,8 @@ services:
         arguments:
             $cache: '@redis_adapter'
 
+    old_sound_rabbit_mq.rating_producer: ~
+
     StudentBundle\Service\AsyncService:
         calls:
             - ['registerProducer', [!php/const StudentBundle\Service\AsyncService::RATING, '@old_sound_rabbit_mq.rating_producer']]
