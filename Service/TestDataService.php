@@ -40,13 +40,6 @@ class TestDataService
             'Сидр Сидоров',
             'Маша Машина',
             'Катя Катина',
-/*
-            'Клава Клавина',
-            'Вася Васечкин',
-            'Оля Олина',
-            'Женя Женин',
-            'Алексей Алексеев'
-*/
         ];
 
         foreach ($nameStudents as $keyStudent => $nameStudent)
@@ -188,7 +181,7 @@ class TestDataService
         foreach ($tasks as $task)
         {
             $studentsInTask = [];
-            $countStudentsInTask = rand(3, 5);
+            $countStudentsInTask = rand(2, 4);
             for ($i = 1; $i <= $countStudentsInTask; $i++)
             {
                 $rate = rand(1, 10);
