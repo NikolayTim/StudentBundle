@@ -20,8 +20,8 @@ services:
         arguments:
             $cache: '@redis_adapter'
 
-    old_sound_rabbit_mq.rating_producer:
-        synthetic: true
+    # old_sound_rabbit_mq.rating_producer:
+        # synthetic: true
 
     StudentBundle\Service\AsyncService:
         calls:
