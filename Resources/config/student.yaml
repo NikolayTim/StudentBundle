@@ -1,0 +1,32 @@
+doctrine:
+    orm:
+        mappings:
+            StudentBundle:
+                is_bundle: true
+                type: annotation
+                dir: 'Entity'
+                prefix: 'StudentBundle\Entity'
+                alias: StudentBundle
+
+api_platform:
+    mapping:
+        paths: ['%kernel.project_dir%/vendor/studentbundle/student-bundle/DTO']
+
+old_sound_rabbit_mq:
+    producers:
+        rating:
+            connection: default
+            exchange_options: { name: 'old_sound_rabbit_mq.rating', type: direct }
+
+    consumers:
+        rating:
+            connection: default
+            exchange_options: { name: 'old_sound_rabbit_mq.rating', type: direct }
+            queue_options: { name: 'old_sound_rabbit_mq.consumer.rating' }
+            callback: StudentBundle\Consumer\Rating\Consumer
+            idle_timeout: 300
+            idle_timeout_exit_code: 0
+            graceful_max_execution:
+                timeout: 1800
+                exit_code: 0
+            qos_options: { prefetch_size: 0, prefetch_count: 1, global: false }
